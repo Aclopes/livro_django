@@ -40,9 +40,12 @@ class Profile(models.Model):
             ratings = Rating.objects.filter(user_rated=self.user).aggregate(Sum('value'), Count('user'))
             if ratings['user__count'] > 0:
                 scoring_average = ratings['value__sum']/ratings['user__count']
-                scoring_average = round(scoring_average, 2)
-                return scoring_average
+                return round(scoring_average, 2)
             return 'Sem Avaliação'
         except:
             return 'Sem avaliação'
     
+
+    def show_favorites(self):
+        ids = [result.id for result in self.favorites.all()]
+        return Profile.objects.filter(user__id__in=ids)
