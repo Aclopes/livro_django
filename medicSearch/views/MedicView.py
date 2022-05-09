@@ -67,8 +67,8 @@ def add_favorite_view(request):
         medic = Profile.objects.filter(user__id=id).first()
         profile.favorites.add(medic.user)
         profile.save()
-        msg = "Doctor added to Favorites"
-        _type = 'success'
+        # msg = "Doctor added to Favorites"
+        # _type = 'success'
     except Exception as e:
         print("ERROR: %s" % e)
         msg = "An error when try to save a Doctor in Favorites"
